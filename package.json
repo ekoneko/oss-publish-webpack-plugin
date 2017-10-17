@@ -1,0 +1,18 @@
+{
+  "name": "oss-publish-webpack-plugin",
+  "version": "1.0.0",
+  "description": "A webpack plugin for uploading files to aliyun oss",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aliyun-sdk": "^1.10.18"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.44",
+    "typescript": "^2.5.3"
+  }
+}
