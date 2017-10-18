@@ -7,10 +7,11 @@ import OSSPublishWebpackPlugin from 'oss-publish-webpack-plugin'
   plugins: [
     new OSSPublishWebpackPlugin({
       bucket: 'your bucket',
-      include: /\/assets\//,
+      includes: [/\/assets\//], // optional
+      excludes: [], // optional
       oss: {
         accessKeyId: '',
-        secretAccessKey: ''
+        secretAccessKey: '',
         endpoint: 'http://oss-cn-beijing-internal.aliyuncs.com'
       }
     })

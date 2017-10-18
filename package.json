@@ -4,13 +4,17 @@
   "description": "A webpack plugin for uploading files to aliyun oss",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "rm -rf lib && tsc"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "aliyun-sdk": "^1.10.18"
   },
+  "files": [
+    "lib"
+  ],
   "devDependencies": {
     "@types/node": "^8.0.44",
     "typescript": "^2.5.3"
