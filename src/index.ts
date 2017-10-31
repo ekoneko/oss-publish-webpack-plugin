@@ -43,24 +43,28 @@ export default class OSSPublishWebpackPlugin {
             ...oss,
         })
 
-        compiler.plugin('after-emit', (compilation) => {
+        compiler.plugin('after-emit', (compilation, callback) => {
             const files = this.getFiles(compilation.assets)
-            files.forEach(file => this.publish(file))
+            const promises = files.map(file => this.publish(file))
+            Promise.all(promises).then(() => callback())
         })
     }
 
-    private publish (file: file) {
+    private publish (file: file): Promise<void> {
         // @see https://github.com/aliyun-UED/aliyun-sdk-js/blob/master/samples/oss/PutObject.js
-        this.ossClient.putObject({
-            Bucket: this.options.bucket,
-            Key: file.name,
-            Body: file.body
-        }, (err, data) => {
-            if (err) {
-                console.error('[oss] publish failed: ${file.name}', err)
-            } else {
-                console.log(`[oss] publish success: ${file.name}`)
-            }
+        return new Promise(resolve => {
+            this.ossClient.putObject({
+                Bucket: this.options.bucket,
+                Key: file.name,
+                Body: file.body
+            }, (err, data) => {
+                if (err) {
+                    console.error('[oss] publish failed: ${file.name}', err)
+                } else {
+                    console.log(`[oss] publish success: ${file.name}`)
+                }
+                resolve()
+            })
         })
     }
 
